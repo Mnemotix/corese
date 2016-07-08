@@ -17,31 +17,30 @@ import fr.inria.edelweiss.kgram.event.Event;
 import fr.inria.edelweiss.kgram.event.EventImpl;
 import fr.inria.edelweiss.kgram.event.EventManager;
 
-/*
+/**
  * Manage list of Mapping, result of a query
- * 
+ * <p>
  * process select distinct
  * process group by, order by, limit offset, aggregates, having(?count>50)
- * 
+ *
  * @author Olivier Corby, Edelweiss, INRIA 2009
- */
-public class Mappings extends PointerObject
-        implements Comparator<Mapping>, Iterable<Mapping> {
+ **/
+public class Mappings extends PointerObject implements Comparator<Mapping>, Iterable<Mapping> {
 
     private static final String NL = System.getProperty("line.separator");
     ;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private static int SELECT = -1;
     private static int HAVING = -2;
     List<Node> select;
     boolean isDistinct = false,
             isValid = true,
             hasEvent = false,
-            // if true, store all Mapping of the group
-            isListGroup = false;
+    // if true, store all Mapping of the group
+    isListGroup = false;
     boolean sortWithDesc = true;
     Query query;
     List<Mapping> list, reject;
@@ -323,7 +322,6 @@ public class Mappings extends PointerObject
     /**
      * use case: bind(sparql('select ?x ?y where { ... }') as (?z, ?t)) rename
      * ?x as ?z and ?y as ?t in all Mapping as well as in Mappings select
-     *
      */
     public void setNodes(List<Node> nodes) {
         if (getSelect() != null) {
@@ -413,7 +411,6 @@ public class Mappings extends PointerObject
     }
 
     /**
-     *
      * Sort according to node
      */
     void sort(Eval eval, Node node) {
@@ -565,7 +562,7 @@ public class Mappings extends PointerObject
                 // SPARQL test cases requires that aggregate on empty result set return one empty result
                 // and count() return 0
                 add(Mapping.fake(qq));
-                setFake(true);  
+                setFake(true);
             } else {
                 return;
             }
@@ -976,12 +973,12 @@ public class Mappings extends PointerObject
 
     /**
      * *******************************************************************
-     *
+     * <p>
      * Pipeline Solutions implementation These operations use the select nodes
      * if any and otherwise the query nodes
-     *
-     *
-     ********************************************************************
+     * <p>
+     * <p>
+     * *******************************************************************
      */
     public Mappings union(Mappings lm) {
         Mappings res = new Mappings();
@@ -1227,6 +1224,7 @@ public class Mappings extends PointerObject
 //			}
 //		}
 //	}
+
     /**
      * @return the eval
      */

@@ -1,6 +1,7 @@
 package fr.inria.edelweiss.kgram.core;
 
 import fr.inria.edelweiss.kgram.api.core.DatatypeValue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,12 +29,14 @@ import fr.inria.edelweiss.kgram.event.ResultListener;
 import fr.inria.edelweiss.kgram.path.PathFinder;
 import fr.inria.edelweiss.kgram.tool.Message;
 import fr.inria.edelweiss.kgram.tool.ResultsImpl;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Level;
+
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
 
@@ -42,15 +45,14 @@ import org.apache.log4j.Logger;
  * (extended) SPARQL Use: a Stack of expression Exp a Memory for Node/Edge
  * bindings an abstract Producer of candidate Node/Edge an abstract Evaluator of
  * Filter an abstract Matcher of Node/Edge
- *
+ * <p>
  * - path statement is an EDGE with a boolean isPath this edge needs an Edge
  * Node (a property variable)
- *
- *
+ * <p>
+ * <p>
  * TODO: optimize: query ordering, search by dichotomy (in a cache)
  *
  * @author Olivier Corby, Edelweiss, INRIA 2010
- *
  */
 public class Eval implements ExpType, Plugin {
 
@@ -58,19 +60,19 @@ public class Eval implements ExpType, Plugin {
     private static final String PREF = EXT;
     private static final String FUN_CANDIDATE = PREF + "candidate";
     private static final String FUN_SERVICE = PREF + "service";
-    private static final String FUN_MINUS   = PREF + "minus";
-    private static final String FUN_OPTIONAL= PREF + "optional";
-    private static final String FUN_RESULT  = PREF + "result";
-    private static final String FUN_SOLUTION= PREF + "solution";
-    private static final String FUN_START   = PREF + "start";
-    private static final String FUN_FINISH  = PREF + "finish";
+    private static final String FUN_MINUS = PREF + "minus";
+    private static final String FUN_OPTIONAL = PREF + "optional";
+    private static final String FUN_RESULT = PREF + "result";
+    private static final String FUN_SOLUTION = PREF + "solution";
+    private static final String FUN_START = PREF + "start";
+    private static final String FUN_FINISH = PREF + "finish";
     private static final String FUN_PRODUCE = PREF + "produce";
 
     static final int STOP = -2;
     public static int count = 0;
     ResultListener listener;
     EventManager manager;
-    private SPARQLEngine sparqlEngine;            
+    private SPARQLEngine sparqlEngine;
     boolean hasEvent = false;
     // Edge and Node producer
     Producer producer, saveProducer;
@@ -90,8 +92,8 @@ public class Eval implements ExpType, Plugin {
     Exp edgeToDiffer;
     Mapping mapping;
     Mappings results,
-            // initial results to be completed
-            initialResults;
+    // initial results to be completed
+    initialResults;
     List<Node> empty = new ArrayList<Node>(0);
     HashMap<String, Boolean> local;
 
@@ -99,14 +101,14 @@ public class Eval implements ExpType, Plugin {
             nbEdge = 0, nbCall = 0,
             rcount = 0,
             backjump = -1, indexToDiffer = -1,
-            // max level in stack for debug
-            level = -1,
+    // max level in stack for debug
+    level = -1,
             maxLevel = -1,
             limit = Integer.MAX_VALUE;
     boolean debug = false,
             isSubEval = false,
-            // return only select variables in Mapping
-            onlySelect = true,
+    // return only select variables in Mapping
+    onlySelect = true,
             optim = true,
             draft = true;
     private boolean hasListener = false;
@@ -117,18 +119,18 @@ public class Eval implements ExpType, Plugin {
             hasCandidate = false,
             hasOptional,
             hasMinus,
-            hasResult   = false,
-            hasStart    = false,
-            hasFinish   = false,
-            hasProduce  = false,
+            hasResult = false,
+            hasStart = false,
+            hasFinish = false,
+            hasProduce = false,
             hasSolution = false;
 
     //Edge previous;
+
     /**
-     *
      * @param p edge and node producer
      * @param e filter evaluator, given an environment (access to variable
-     * binding)
+     *          binding)
      */
     Eval(Producer p, Evaluator e, Matcher m) {
         producer = p;
@@ -140,8 +142,8 @@ public class Eval implements ExpType, Plugin {
         e.setKGRAM(this);
         initCallback();
     }
-    
-    void initCallback(){
+
+    void initCallback() {
         local = new HashMap();
         local.put(FUN_PRODUCE, true);
     }
@@ -191,14 +193,14 @@ public class Eval implements ExpType, Plugin {
         }
         if (hasSolution) {
             memory.setResults(map);
-            Object res = eval(getExpression(FUN_SOLUTION), 
+            Object res = eval(getExpression(FUN_SOLUTION),
                     toArray(producer.getNode(q), producer.getNode(map)));
             map.complete();
         }
 
         return map;
     }
-    
+
     public void finish(Query q, Mappings map) {
         if (hasFinish) {
             memory.setResults(map);
@@ -214,7 +216,7 @@ public class Eval implements ExpType, Plugin {
     private Mappings eval(Node gNode, Query q, Mapping map) {
         init(q);
         if (hasStart && !q.isSubQuery()) {
-            Object res = eval(getExpression(q, FUN_START), 
+            Object res = eval(getExpression(q, FUN_START),
                     toArray(producer.getNode(q)));
         }
         {
@@ -247,7 +249,7 @@ public class Eval implements ExpType, Plugin {
         evaluator.finish(memory);
         return results;
     }
-    
+
     /**
      * We just counted number of results: nbResult Just build a Mapping
      */
@@ -423,7 +425,6 @@ public class Eval implements ExpType, Plugin {
     }
 
     /**
-     *
      * Copy current evaluator to eval subquery same memory (share bindings) new
      * exp stack
      */
@@ -467,7 +468,6 @@ public class Eval implements ExpType, Plugin {
     /**
      * copy memory for sub query copy sub query select variables that are
      * already bound in current memory
-     *
      */
     private Memory copyMemory(Query query, Query sub) {
         return copyMemory(memory, query, sub);
@@ -515,8 +515,6 @@ public class Eval implements ExpType, Plugin {
      * use case: exists {} in aggregate select (count(if (exists { BGP }, ?x,
      * ?y)) as ?c) Env is a Mapping Copy Mapping into fresh Memory in order to
      * evaluate exists {} in Memory TODO: optimize by storing mem
-     *
-     *
      */
     public Memory getMemory(Mapping map, Exp exp) {
         Memory mem = new Memory(match, evaluator);
@@ -563,7 +561,7 @@ public class Eval implements ExpType, Plugin {
             // when subquery, memory is already assigned
             // assign stack index to EDGE and NODE
             q.complete(producer);//service while1 / Query
-            memory = new Memory(match, evaluator);           
+            memory = new Memory(match, evaluator);
             // create memory bind stack
             memory.init(q);
             if (hasEvent) {
@@ -616,18 +614,18 @@ public class Eval implements ExpType, Plugin {
     }
 
     void startExtFun() {
-        if (! query.hasDefinition()){
+        if (!query.hasDefinition()) {
             return;
         }
-        hasCandidate= (getExpression(FUN_CANDIDATE) != null);
-        hasService  = (getExpression(FUN_SERVICE) != null);
+        hasCandidate = (getExpression(FUN_CANDIDATE) != null);
+        hasService = (getExpression(FUN_SERVICE) != null);
         hasOptional = (getExpression(FUN_OPTIONAL) != null);
-        hasMinus    = (getExpression(FUN_MINUS) != null);
-        hasProduce  = (getExpression(FUN_PRODUCE) != null);
-        hasResult   = (getExpression(FUN_RESULT) != null);
+        hasMinus = (getExpression(FUN_MINUS) != null);
+        hasProduce = (getExpression(FUN_PRODUCE) != null);
+        hasResult = (getExpression(FUN_RESULT) != null);
         hasSolution = (getExpression(FUN_SOLUTION) != null);
-        hasStart    = (getExpression(FUN_START) != null);
-        hasFinish   = (getExpression(FUN_FINISH) != null);
+        hasStart = (getExpression(FUN_START) != null);
+        hasFinish = (getExpression(FUN_FINISH) != null);
     }
 
     private void complete() {
@@ -748,7 +746,7 @@ public class Eval implements ExpType, Plugin {
 
     /**
      * Eval a stack of KGRAM expressions
-     *
+     * <p>
      * AND pushes the elements in the stack UNION generates two copies of the
      * stack that are run in sequence, one for each arg of the union OPTION{EXP}
      * generates WATCH EXP CONTINUE OPTION{A UNION B} generates two stacks that
@@ -756,15 +754,12 @@ public class Eval implements ExpType, Plugin {
      * GRAPH NODE EXP evaluate the EXP and relations must be quads that contain
      * a graph node NODE enumerate and bind a node NODE may also bind NODEs
      * given in the args EDGE enumerate relations FILTER evaluate a filter
-     *
+     * <p>
      * QUERY implements select subquery, share bindings NOT { EXP } implements
      * NAF compiled as WATCH EXP BACKJUMP FORALL {}{} EXIST {}
-     *
+     * <p>
      * Manage backjump, i.e. backtrack at lever less than n-1 needed for NOT in
      * order to backtrack at once before the not
-     *
-     *
-     *
      */
     private int eval(Node gNode, Stack stack, int n) {
         return eval(producer, gNode, stack, n);
@@ -844,8 +839,8 @@ public class Eval implements ExpType, Plugin {
                     break;
 
                 case AND:
-                        stack = stack.and(exp, n);
-                        backtrack = eval(p, gNode, stack, n);
+                    stack = stack.and(exp, n);
+                    backtrack = eval(p, gNode, stack, n);
                     break;
 
                 case BGP:
@@ -864,7 +859,7 @@ public class Eval implements ExpType, Plugin {
                         // switch Producer to path
                         backtrack
                                 = inGraph(p, memory.getPath(exp.getGraphName()),
-                                        gNode, exp, stack, n);
+                                gNode, exp, stack, n);
                     } else {
                         Node gg = getNode(exp.getGraphName());
                         if (gg != null && p.isProducer(gg)) {
@@ -873,7 +868,7 @@ public class Eval implements ExpType, Plugin {
                             // switch Producer 
                             backtrack
                                     = inGraph(p, p.getProducer(gg, memory),
-                                            gNode, exp, stack, n);
+                                    gNode, exp, stack, n);
                         } else {
                             backtrack = graph(gNode, exp, stack, n);
                         }
@@ -895,8 +890,8 @@ public class Eval implements ExpType, Plugin {
                     break;
 
                 case OPTION: // compiled as: WATCH EXP CONTINUE
-                // true means if reach CONT, WATCH must backtrack after
-                // option succeed
+                    // true means if reach CONT, WATCH must backtrack after
+                    // option succeed
                 {
                     stack = stack.watch(exp.first(), WATCH, CONTINUE, true, n);
                     backtrack = eval(p, gNode, stack, n);
@@ -991,7 +986,7 @@ public class Eval implements ExpType, Plugin {
                     if (query.getOuterQuery().isPathType() && exp.hasPath()) {
                         backtrack = path(p, gNode, exp.getPath(), stack, n);
                     } else {
-                            backtrack = edge(p, gNode, exp, stack, n);
+                        backtrack = edge(p, gNode, exp, stack, n);
                     }
                     break;
 
@@ -1116,10 +1111,10 @@ public class Eval implements ExpType, Plugin {
      */
     /**
      * use case:
-     *
+     * <p>
      * (n) EDGE{?x ?q ?z} (n+1) FILTER{?x = ?y} with BIND {?x := ?y} compiled
      * as:
-     *
+     * <p>
      * (n) BIND {?x := ?y} (n+1) EDGE{?x ?q ?z} (n+2) FILTER{?x = ?y}
      */
     private int optBind(Producer p, Node gNode, Exp exp, Stack stack, int n) {
@@ -1375,7 +1370,7 @@ public class Eval implements ExpType, Plugin {
         if (map1.size() == 0) {
             return backtrack;
         }
-        
+
         exp.rest().setMappings(map1);
         Mappings map2 = subEval(p, gNode, gNode, exp.rest(), exp);
 
@@ -1488,7 +1483,7 @@ public class Eval implements ExpType, Plugin {
             // no variable in common : simple cartesian product
             backtrack = simpleJoin(p, gNode, stack, env, map1, map2, n);
         } else {
-             // map1 and map2 share a variable q
+            // map1 and map2 share a variable q
             // sort map2 on q
             // enumerate map1
             // retreive the index of value of q in map2 by dichotomy
@@ -1835,7 +1830,7 @@ public class Eval implements ExpType, Plugin {
         for (Node graph : prod.getGraphNodes(gNode, qq.getFrom(gNode), env)) {
             if (//member(graph, query.getFrom(gNode)) && 
                     mm.match(gNode, graph, env)
-                    && env.push(gNode, graph, n)) {
+                            && env.push(gNode, graph, n)) {
                 // set new/former gNode
                 backtrack = eval(nextGraph, stack, next);
                 env.pop(gNode);
@@ -1871,7 +1866,7 @@ public class Eval implements ExpType, Plugin {
         Exp next = getRestore(p, exp);
         stack.add(n + 1, next);
         backtrack = eval(np, gNode, stack, n);
-        for (int i = n + 1; i < stack.size() && stack.get(i) != next;) {
+        for (int i = n + 1; i < stack.size() && stack.get(i) != next; ) {
             stack.remove(i);
         }
         if (stack.size() > n + 1) {
@@ -1920,26 +1915,26 @@ public class Eval implements ExpType, Plugin {
         int backtrack = n - 1;
         Memory env = memory;
         Mappings map = evaluator.eval(exp.getFilter(), env, exp.getNodeList());
-        
+
         if (map != null) {
-            HashMap<String, Node>  tab =  toMap(exp.getNodeList());
+            HashMap<String, Node> tab = toMap(exp.getNodeList());
             for (Mapping m : map) {
-                if (env.push(tab, m, n)) {  
+                if (env.push(tab, m, n)) {
                     backtrack = eval(p, gNode, stack, n + 1);
                     env.pop(tab, m);
                     if (backtrack < n) {
                         return backtrack;
                     }
-                }               
+                }
             }
         }
 
         return backtrack;
     }
-    
-    HashMap<String, Node> toMap(List<Node> list){
+
+    HashMap<String, Node> toMap(List<Node> list) {
         HashMap<String, Node> m = new HashMap<String, Node>();
-        for (Node node : list){
+        for (Node node : list) {
             m.put(node.getLabel(), node);
         }
         return m;
@@ -1948,7 +1943,6 @@ public class Eval implements ExpType, Plugin {
     /**
      * Special case: optional{} !bound(?x) When filter fail, backjump before
      * optional
-     *
      */
     private int filter(Producer p, Node gNode, Exp exp, Stack stack, int n) {
         int backtrack = n - 1;
@@ -2070,7 +2064,6 @@ public class Eval implements ExpType, Plugin {
 
     /**
      * Enumerate candidate edges
-     *
      */
     private int edge(Producer p, Node gNode, Exp exp, Stack stack, int n) {
         int backtrack = n - 1, evENUM = Event.ENUM;
@@ -2224,7 +2217,7 @@ public class Eval implements ExpType, Plugin {
     DatatypeValue candidate(Edge q, Entity ent, Object match) {
         Expr exp = getExpression(FUN_CANDIDATE);
         if (exp != null) {
-            Object obj = eval(exp, 
+            Object obj = eval(exp,
                     toArray(q.getNode().getValue(), ent.getNode().getValue(), match));
             DatatypeValue val = producer.getDatatypeValue(obj);
             return val;
@@ -2238,25 +2231,26 @@ public class Eval implements ExpType, Plugin {
             eval(exp, toArray(node.getValue(), producer.getNode(serv), producer.getNode(m)));
         }
     }
-    
-      /**
-         * eval callback by name
-         * Only with functions defined in the query 
-         * name is not an export function, but it can call export functions
-         * @param name
-         * @return
-         * @throws EngineException 
-         * */
-       
-	public Object eval(String name, Object[] param) {
-            Expr exp = getExpression(name);           
-            if (exp != null){              
-                return  eval(exp, param);
-            }
-            return null;           
+
+    /**
+     * eval callback by name
+     * Only with functions defined in the query
+     * name is not an export function, but it can call export functions
+     *
+     * @param name
+     * @return
+     * @throws EngineException
+     */
+
+    public Object eval(String name, Object[] param) {
+        Expr exp = getExpression(name);
+        if (exp != null) {
+            return eval(exp, param);
         }
-    
-   public Object eval(Expr exp, Object[] param){
+        return null;
+    }
+
+    public Object eval(Expr exp, Object[] param) {
         return evaluator.eval(exp, memory, producer, param);
     }
 
@@ -2264,12 +2258,12 @@ public class Eval implements ExpType, Plugin {
         return getExpression(query, name);
     }
 
-    Expr getExpression(Query q, String name) {       
+    Expr getExpression(Query q, String name) {
         return q.getExpression(name, inherit(q, name));
     }
-    
-    boolean inherit(Query q, String name){
-        return ! (q.isFun() && local.containsKey(name));
+
+    boolean inherit(Query q, String name) {
+        return !(q.isFun() && local.containsKey(name));
     }
 
     Object[] toArray(Object o1, Object o2, Object o3) {
@@ -2288,7 +2282,8 @@ public class Eval implements ExpType, Plugin {
     }
 
     public Object[] toArray(Object o1) {
-        Object[] res = evaluator.getProxy().createParam(1);;
+        Object[] res = evaluator.getProxy().createParam(1);
+        ;
         res[0] = o1;
         return res;
     }
@@ -2343,7 +2338,6 @@ public class Eval implements ExpType, Plugin {
     /**
      * select * where {{select distinct ?y where {?x p ?y}} . ?y q ?z} new eval,
      * new memory, share only sub query select variables
-     *
      */
     private int query(Producer p, Node gNode, Exp exp, Stack stack, int n) {
         int backtrack = n - 1, evENUM = Event.ENUM;
@@ -2372,11 +2366,11 @@ public class Eval implements ExpType, Plugin {
             }
 
             lMap = ev.eval(subNode, subQuery, null);
-            if (! subQuery.isFun() && !isBound(subQuery, env) && gNode == null) {
+            if (!subQuery.isFun() && !isBound(subQuery, env) && gNode == null) {
                 exp.setObject(lMap);
             }
         }
-        
+
         // enumerate the result of the sub query
         // bind the select nodes into the stack
         for (Mapping map : lMap) {
@@ -2441,7 +2435,6 @@ public class Eval implements ExpType, Plugin {
 
     /**
      * SPARQL semantics
-     *
      */
     private int optional(Producer p, Node gNode, Exp exp, Stack stack, int n) {
         int backtrack = n - 1;
@@ -2570,7 +2563,6 @@ public class Eval implements ExpType, Plugin {
     /**
      * res is a result of sub query bind the select nodes of sub query into
      * current memory retrieve outer node that correspond to sub node
-     *
      */
     private boolean push(Query subQuery, Mapping res, int n) {
         int k = 0;
@@ -2643,7 +2635,7 @@ public class Eval implements ExpType, Plugin {
             if (outNode != null && env.isBound(outNode)) {
                 return true;
             }
-            if (env.getBind() != null && env.getBind().isBound(subNode.getLabel())){
+            if (env.getBind() != null && env.getBind().isBound(subNode.getLabel())) {
                 return true;
             }
         }

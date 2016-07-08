@@ -11,9 +11,9 @@ import fr.inria.acacia.corese.triple.parser.NSManager;
  */
 public interface AbstractProcess {
     
-    static final String PREF = NSManager.SWL;
-    static final String GRAPH = PREF + "graph";
-    static final String PROBE = PREF + "probe";
+    String PREF = NSManager.SWL;
+    String GRAPH = PREF + "graph";
+    String PROBE = PREF + "probe";
             
    
     void subscribe(SemanticWorkflow w);

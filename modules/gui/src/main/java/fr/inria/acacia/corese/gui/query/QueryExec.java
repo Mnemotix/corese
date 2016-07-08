@@ -11,8 +11,6 @@ import fr.inria.edelweiss.kgram.core.Mappings;
 import fr.inria.edelweiss.kgram.event.EventListener;
 import fr.inria.edelweiss.kgraph.query.QueryProcess;
 
-
-
 /**
  * Evaluator of SPARQL query by KGRAM
  * Implement KGRAM on top of Corese with Corese API, lightweight version:

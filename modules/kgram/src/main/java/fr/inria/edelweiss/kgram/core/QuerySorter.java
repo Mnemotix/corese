@@ -7,6 +7,7 @@ import fr.inria.edelweiss.kgram.api.core.Filter;
 import fr.inria.edelweiss.kgram.api.core.Node;
 import fr.inria.edelweiss.kgram.api.query.Producer;
 import fr.inria.edelweiss.kgram.filter.Compile;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import java.util.List;
  * Insert filters at place where variables are bound
  *
  * @author Olivier Corby, Wimmics Inria I3S, 2014
- *
  */
 public class QuerySorter implements ExpType {
 
@@ -115,7 +115,7 @@ public class QuerySorter implements ExpType {
                     lVar = list;
                 }
 
-            // continue with subquery body
+                // continue with subquery body
             default:
 
                 if (type == OPTION || type == OPTIONAL
@@ -136,26 +136,26 @@ public class QuerySorter implements ExpType {
                         // take OPT_BIND(var = exp) into account
                         // TODO: graph ?g does not take into account OPT_BIND ?g = uri
                         switch (query.getPlanProfile()) {
-                            
+
                             case Query.QP_T0:
                                 sortFilter(exp, lVar);
                                 break;
-                                
+
                             case Query.QP_HEURISTICS_BASED:
                                 sort = new SorterNew();
                                 ((SorterNew) sort).sort(exp, lBind, prod, query.getPlanProfile());
                                 setBind(query, exp);
                                 break;
-                                
+
                             case Query.QP_BGP:
                                 sort.sort(query, exp, lVar, lBind);
                                 sortFilter(exp, lVar);
                                 setBind(query, exp);
-                                if (query.getBgpGenerator() != null){
+                                if (query.getBgpGenerator() != null) {
                                     exp = query.getBgpGenerator().process(exp);
                                 }
                                 break;
-                                
+
                             case Query.QP_DEFAULT:
                                 sort.sort(query, exp, lVar, lBind);
                                 sortFilter(exp, lVar);
@@ -165,7 +165,7 @@ public class QuerySorter implements ExpType {
                         }
 
                         service(exp);
-                    }                  
+                    }
                 }
                 //******* Query plan END********
 
@@ -210,9 +210,9 @@ public class QuerySorter implements ExpType {
 
         return exp;
     }
-    
-    void setBind(Query q, Exp exp){
-        if (q.isUseBind()){
+
+    void setBind(Query q, Exp exp) {
+        if (q.isUseBind()) {
             exp.setBind();
         }
     }

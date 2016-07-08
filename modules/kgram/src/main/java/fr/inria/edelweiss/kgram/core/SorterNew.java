@@ -2,14 +2,18 @@ package fr.inria.edelweiss.kgram.core;
 
 import static fr.inria.edelweiss.kgram.api.core.ExpType.BIND;
 import static fr.inria.edelweiss.kgram.api.core.ExpType.GRAPH;
+
 import fr.inria.edelweiss.kgram.api.query.Producer;
+
 import static fr.inria.edelweiss.kgram.sorter.core.Const.plannable;
+
 import fr.inria.edelweiss.kgram.sorter.core.QPGraph;
 import fr.inria.edelweiss.kgram.sorter.core.IEstimate;
 import fr.inria.edelweiss.kgram.sorter.core.ISort;
 import fr.inria.edelweiss.kgram.sorter.core.QPGNode;
 import fr.inria.edelweiss.kgram.sorter.impl.qpv1.DepthFirstBestSearch;
 import fr.inria.edelweiss.kgram.sorter.impl.qpv1.HeuristicsBasedEstimation;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -28,7 +32,7 @@ public class SorterNew extends Sorter {
     boolean print = false;
 
     public void sort(Exp expression, List<Exp> bindings, Producer prod, int planType) {
-        if(expression.size() < 2) return;
+        if (expression.size() < 2) return;
 
         Map<Integer, List<Exp>> ESGs = tokenize(expression);
         if (ESGs.isEmpty()) return;
@@ -92,8 +96,8 @@ public class SorterNew extends Sorter {
             }
 
             message(" -- Sorting time:" + (System.currentTimeMillis() - stop1) + "ms");
-            message(" -- Sorting [after] :" + exps+ "\n");
-            
+            message(" -- Sorting [after] :" + exps + "\n");
+
             // ** 4 rewrite **
             is.rewrite(expression, l, startIndex);
         }

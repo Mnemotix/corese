@@ -2,88 +2,86 @@ package fr.inria.edelweiss.kgram.api.core;
 
 /**
  * Interface of Property Path Regex
- * 
- * @author Olivier Corby, Edelweiss, INRIA 2010
  *
+ * @author Olivier Corby, Edelweiss, INRIA 2010
  */
 public interface Regex {
-	
-	public static final int UNDEF	= -1;
-	public static final int LABEL	= 0;
-	public static final int NOT 	= 1;
-	public static final int SEQ 	= 2;
-	public static final int STAR 	= 3;
-	public static final int PLUS 	= 4;
-	public static final int OPTION 	= 5;
-	public static final int COUNT 	= 6;
-	public static final int ALT		= 7;
-	public static final int PARA	= 8;
-	public static final int TEST	= 9;
-	public static final int CHECK	= 10;
-	public static final int REVERSE	= 11;
 
-	
-	String getName();
-	
-	String getLongName();
-	
-	String toRegex();
-	
-	int retype();
-	
-	int getArity();
-	
-	boolean isConstant();
-	
-	boolean isAlt();
-	
-	boolean isPara();
+    int UNDEF = -1;
+    int LABEL = 0;
+    int NOT = 1;
+    int SEQ = 2;
+    int STAR = 3;
+    int PLUS = 4;
+    int OPTION = 5;
+    int COUNT = 6;
+    int ALT = 7;
+    int PARA = 8;
+    int TEST = 9;
+    int CHECK = 10;
+    int REVERSE = 11;
 
-	boolean isSeq();
-	
-	boolean isOpt();
+    String getName();
 
-	boolean isNot();
-		
-	boolean isDistinct();
+    String getLongName();
 
-	boolean isShort();
+    String toRegex();
 
-	// @deprecated
-	boolean isInverse();
+    int retype();
 
-	// @deprecated
-	void setInverse(boolean b);
-	
-	// SPARQL 1.1 reverse ^
-	boolean isReverse();
-	
-	void setReverse(boolean b);
+    int getArity();
 
-	boolean isStar();
-	
-	boolean isPlus();
-	
-	boolean isCounter();
+    boolean isConstant();
 
-	int getMin();
-	
-	int getMax();
-	
-	int getWeight();
-	
-	Regex getArg(int n);
+    boolean isAlt();
 
-	Regex reverse();
-	
-	Regex transform();
+    boolean isPara();
 
-	Regex translate();
-	
-	boolean isNotOrReverse();
+    boolean isSeq();
 
-	int regLength();
-	
-	Expr getExpr();
+    boolean isOpt();
+
+    boolean isNot();
+
+    boolean isDistinct();
+
+    boolean isShort();
+
+    // @deprecated
+    boolean isInverse();
+
+    // @deprecated
+    void setInverse(boolean b);
+
+    // SPARQL 1.1 reverse ^
+    boolean isReverse();
+
+    void setReverse(boolean b);
+
+    boolean isStar();
+
+    boolean isPlus();
+
+    boolean isCounter();
+
+    int getMin();
+
+    int getMax();
+
+    int getWeight();
+
+    Regex getArg(int n);
+
+    Regex reverse();
+
+    Regex transform();
+
+    Regex translate();
+
+    boolean isNotOrReverse();
+
+    int regLength();
+
+    Expr getExpr();
 
 }

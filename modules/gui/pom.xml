@@ -10,27 +10,14 @@
 
     <groupId>fr.inria.wimmics</groupId>
     <artifactId>corese-gui</artifactId>
+    <version>${parent.version}</version>
     <name>Corese - Graphical User Interface</name>
-    <!--    <properties>
-        <corese-version>3.0.7</corese-version>
-    </properties>-->
+
+    <properties>
+        <graphstream.version>1.2</graphstream.version>
+    </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>fr.inria.wimmics</groupId>
-            <artifactId>corese-engine</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.inria.wimmics</groupId>
-            <artifactId>corese-kgenv</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.inria.wimmics</groupId>
-            <artifactId>corese-kgram</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>fr.inria.wimmics</groupId>
             <artifactId>corese-core</artifactId>
@@ -38,79 +25,29 @@
         </dependency>
         <dependency>
             <groupId>fr.inria.wimmics</groupId>
-            <artifactId>corese-sparql</artifactId>
+            <artifactId>corese-engine</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.graphstream</groupId>
             <artifactId>gs-core</artifactId>
+            <version>${graphstream.version}</version>
         </dependency>
         <dependency>
             <groupId>org.graphstream</groupId>
             <artifactId>gs-ui</artifactId>
+            <version>${graphstream.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.icu</groupId>
-            <artifactId>icu4j</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.graphstream</groupId>-->
+            <!--<artifactId>gs-algo</artifactId>-->
+            <!--<version>${graphstream.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
-        <!--<finalName>corese-${corese-version}</finalName>-->
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-                <excludes>
-                    <exclude>data/**</exclude>
-                    <exclude>licenses/**</exclude>
-                </excludes>
-            </resource>
-        </resources>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-            <!--			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>-->
-            <!--
-            <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <executions>
-                <execution>
-                <phase>package</phase>
-                <configuration>
-                    <descriptorId>jar-with-dependencies</descriptorId>
-                    <archive>
-                    <manifest>
-                        <mainClass>fr.inria.acacia.corese.gui.core.MainFrame</mainClass>
-                        <addClasspath>false</addClasspath>
-                    </manifest>
-                    </archive>
-                </configuration>
-                <goals>
-                    <goal>single</goal>
-                </goals>
-                </execution>
-            </executions>
-            </plugin>
-            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -146,27 +83,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <sourceEncoding>utf-8</sourceEncoding>
-                    <targetJdk>1.6</targetJdk>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-                    <xmlOutput>true</xmlOutput>
-                </configuration>
-            </plugin>
-
-
         </plugins>
     </build>
     <profiles>

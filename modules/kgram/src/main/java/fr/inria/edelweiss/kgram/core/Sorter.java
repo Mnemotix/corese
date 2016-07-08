@@ -9,11 +9,10 @@ import fr.inria.edelweiss.kgram.api.core.Node;
  * Sort KGRAM edges in connected order before query process
  *
  * @author Olivier Corby, Edelweiss, INRIA 2011
- *
  */
 public class Sorter {
-   
-   
+
+
     public void sort(Query q, Exp exp, List<String> lVar, List<Exp> lBind) {
         int hasService = 0;
 
@@ -21,7 +20,7 @@ public class Sorter {
 
         for (int i = 0; i < exp.size(); i++) {
             Exp e1 = exp.get(i);
-           
+
             if (e1.isSortable()) {
                 if (lNode.isEmpty() && lVar.isEmpty() && leaveFirst()) {
                     // let first edge at its place
@@ -100,8 +99,8 @@ public class Sorter {
     protected boolean before(Query q, Exp e1, Exp e2, List<Node> lNode, List<String> lVar, List<Exp> lBind) {
         int n1 = e1.nBind(lNode, lVar, lBind);
         int n2 = e2.nBind(lNode, lVar, lBind);
-        
-        if (beforeBind(q, e2, e1)){
+
+        if (beforeBind(q, e2, e1)) {
             n2 += 1;
         }
 
@@ -130,5 +129,5 @@ public class Sorter {
         return false;
     }
 
-  
+
 }

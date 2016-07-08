@@ -1,308 +1,306 @@
 package fr.inria.edelweiss.kgram.api.core;
 
 public interface ExprType {
-    
-	public static int UNDEF   = -1;
-        public static int UNBOUND = -2;
-        public static int LOCAL   = -3;	
-        public static int GLOBAL  = -4;	
 
-	// abstract type
-	public static int JOKER = 1;
-	public static int ALTER	= 2;
-	
-	// type
-	public static int CONSTANT 	= 6;
-	public static int VARIABLE 	= 7;
-	public static int BOOLEAN 	= 8;
-	public static int TERM 		= 9;
-	public static int FUNCTION 	= 10;
-	
+    int UNDEF = -1;
+    int UNBOUND = -2;
+    int LOCAL = -3;
+    int GLOBAL = -4;
 
-	
-	// boolean
-	public static int AND = 11;
-	public static int OR = 12;
-	public static int NOT = 13;
-	
-	// function
-	public static int BOUND = 14;
-	public static int COUNT = 15;
-	// ?x in (1, 2)
-	public static int INLIST = 16;
+    // abstract type
+    int JOKER = 1;
+    int ALTER = 2;
 
-	public static int SAMETERM = 17;
-	public static int CUSTOM = 18;
-	public static int ISNUMERIC = 19;
-	public static int MIN = 20;
-	public static int MAX = 21;
-	public static int AVG = 22;
-	public static int SUM = 23;
-	public static int ISURI = 24;
-	public static int ISBLANK = 25;
-	public static int ISLITERAL = 26;
-	public static int LANG = 27;
-	public static int LANGMATCH = 28;
-	public static int REGEX = 29;
+    // type
+    int CONSTANT = 6;
+    int VARIABLE = 7;
+    int BOOLEAN = 8;
+    int TERM = 9;
+    int FUNCTION = 10;
 
-	public static int DATATYPE = 30;
-	public static int CAST = 31;
-	public static int SELF = 32;
-	public static int DEBUG = 33;
-	public static int EXTERNAL = 34;
-	public static int EXTERN = 35;
-	public static int KGRAM = 36;
-	public static int SQL = 37;
-	public static int XPATH = 38;
-	public static int SKIP = 39;
-	
-	public static int LENGTH = 40;
-	public static int UNNEST = 41;
-	public static int EXIST = 42;
-	public static int STRDT = 43;
-	public static int STRLANG = 44;
-	public static int BNODE = 45;
-	public static int COALESCE = 46;
-	public static int IF = 47;
-	public static int SYSTEM = 48;
-	public static int GROUPCONCAT = 49;
-	public static int SAMPLE = 50;
-	
-	public static int STRLEN 	= 51;
-	public static int SUBSTR 	= 52;
-	public static int UCASE 	= 53;
-	public static int LCASE 	= 54;
-	public static int ENDS 		= 55;
-	public static int STARTS 	= 56;
-	public static int CONTAINS 	= 57;
-	public static int ENCODE 	= 58;
-	public static int CONCAT 	= 59; 
-	
-	public static int YEAR 		= 60; 
-	public static int MONTH 	= 61; 
-	public static int DAY 		= 62; 
-	public static int HOURS 	= 63;
-	public static int MINUTES 	= 64;
-	public static int SECONDS 	= 65;
-	public static int TIMEZONE 	= 66;
-	public static int NOW 		= 67;
-	
-	public static int ABS 		= 68;
-	public static int FLOOR 	= 69;
-	public static int ROUND 	= 70;
-	public static int CEILING 	= 71;
-	public static int RANDOM 	= 72;
 
-	public static int HASH 		= 73;
-	public static int URI 		= 74;
-	public static int TZ 		= 75;
-	public static int STR 		= 76;
+    // boolean
+    int AND = 11;
+    int OR = 12;
+    int NOT = 13;
 
-	public static int STRBEFORE  = 77;
-	public static int STRAFTER 	 = 78;
-	public static int STRREPLACE = 79;
-	public static int FUUID 	 = 80;
-	public static int STRUUID 	 = 81;
-	public static int XSDSTRING 	 = 82;
-        public static int APPROXIMATE 	 = 83;
-        public static int APP_SIM 	 = 84;
+    // function
+    int BOUND = 14;
+    int COUNT = 15;
+    // ?x in (1, 2)
+    int INLIST = 16;
 
-	
-	// term
-	public static int TEQ 	= 101;
-	public static int TNEQ 	= 102;
-	public static int TLE 	= 103;
-	public static int TGE 	= 104;
-	public static int TLT 	= 105;
-	public static int TGT 	= 106;
+    int SAMETERM = 17;
+    int CUSTOM = 18;
+    int ISNUMERIC = 19;
+    int MIN = 20;
+    int MAX = 21;
+    int AVG = 22;
+    int SUM = 23;
+    int ISURI = 24;
+    int ISBLANK = 25;
+    int ISLITERAL = 26;
+    int LANG = 27;
+    int LANGMATCH = 28;
+    int REGEX = 29;
 
-	public static int EQNE 	= 109;
-	
-	public static int EQ 	= 110;
-	public static int NE 	= 111;
-	public static int NEQ 	= 111;
-	
-	public static int GL    = 112;
-	public static int LE 	= 113;
-	public static int GE 	= 114;
-	public static int LT 	= 115;
-	public static int GT 	= 116;
-	
-	public static int PLUS 	= 117;
-	public static int MINUS = 118;
-	public static int MULT 	= 119;
-	
-	public static int DIV 	= 120;
-	
-	public static int CONT 	= 121; // ~
-	public static int START = 122; // ^
-	public static int IN 	= 123; 
-	public static int POWER = 124; 
-	
-	
-	// extension
-	
-	public static int DISPLAY 	= 200;
-	public static int NUMBER  	= 201;
-	public static int SIM 	  	= 202;
-	public static int EXTEQUAL	= 203;
-	public static int EXTCONT       = 204;
-	public static int PROCESS       = 205;
-	public static int ENV   	= 206;
-	public static int DEPTH 	= 207;
-	public static int KG_GRAPH 	= 208;
-	public static int NODE 		= 209;
-	public static int GET_OBJECT 	= 210;
-	public static int SET_OBJECT 	= 211;
-	public static int LOAD 		= 212;
-	public static int PATHNODE 	= 213;
-	public static int GROUPBY 	= 214;
-	public static int PSIM 		= 215;
-	public static int GETP		= 216;
-	public static int SETP 		= 217;
-	public static int PWEIGHT 	= 218;
-	public static int ANCESTOR 	= 219;
-	public static int PROVENANCE 	= 220;
-	public static int INDEX 	= 221;
-	public static int TIMESTAMP 	= 222;
-	public static int ID            = 223;
-	public static int TEST          = 224;
-	public static int DESCRIBE      = 225;
-	public static int STORE         = 226;
-		
-	
+    int DATATYPE = 30;
+    int CAST = 31;
+    int SELF = 32;
+    int DEBUG = 33;
+    int EXTERNAL = 34;
+    int EXTERN = 35;
+    int KGRAM = 36;
+    int SQL = 37;
+    int XPATH = 38;
+    int SKIP = 39;
 
-	public static int TURTLE 	= 227;
-	public static int LEVEL 	= 228;
-	public static int INDENT 	= 229;
-	public static int PPURI 	= 230;
-	public static int URILITERAL 	= 231;
-	public static int VISITED 	= 232;
-	public static int AGGAND 	= 233;
-	public static int PROLOG 	= 234;
-	public static int WRITE 	= 235;
-	public static int FOCUS_NODE 	= 236;
-	public static int XSDLITERAL 	= 237;
-	public static int QNAME 	= 238;
-        
-	public static int STL_DEFAULT 	= 239;
-	public static int STL_DEFINE 	= 240;
-	public static int STL_NL 	= 241;
-	public static int STL_PREFIX 	= 242;
-	public static int STL_AGGREGATE = 243;
-	public static int STL_CONCAT    = 244;
-	public static int STL_GROUPCONCAT= 245;
-	public static int STL_AND       = 246;
-	public static int STL_NUMBER    = 247;
-	public static int STL_LOAD      = 248;
-	public static int STL_IMPORT    = 249;
-	public static int STL_PROCESS 	= 250;
-       
-        
-        public static int APPLY_TEMPLATES           = 251;
-	public static int APPLY_TEMPLATES_WITH      = 252;
-	public static int APPLY_TEMPLATES_ALL       = 253;
-	public static int APPLY_TEMPLATES_WITH_ALL  = 254;
-	public static int APPLY_TEMPLATES_GRAPH     = 255;
-	public static int APPLY_TEMPLATES_WITH_GRAPH= 256;
-        public static int APPLY_TEMPLATES_NOGRAPH   = 257;
-	public static int APPLY_TEMPLATES_WITH_NOGRAPH= 258;        
-	public static int CALL_TEMPLATE             = 259;
-	public static int CALL_TEMPLATE_WITH        = 260;
-	public static int STL_TEMPLATE              = 261;
-        
- 	public static int STL_SET                   = 262;
- 	public static int STL_GET                   = 263;
- 	public static int STL_BOOLEAN               = 264;
- 	public static int STL_VISIT                 = 265;
- 	public static int STL_VISITED               = 266;
- 	public static int STL_FUTURE                = 267;
- 	public static int STL_INDEX                 = 268;
- 	public static int STL_VSET                  = 269;
- 	public static int STL_VGET                  = 270;
- 	public static int STL_PROCESS_URI           = 271;
- 	public static int STL_EXPORT                = 272;
- 	public static int STL_ERRORS                = 273;
- 	public static int STL_ISSTART               = 274;
- 	public static int AGGLIST                   = 275;
- 	public static int AGGREGATE                 = 276;
- 	public static int STL_FORMAT                = 277;
- 	public static int STL_VISITED_GRAPH         = 278;
-        
-              
-	public static int ISSKOLEM 	= 300;
-	public static int SKOLEM 	= 301;
+    int LENGTH = 40;
+    int UNNEST = 41;
+    int EXIST = 42;
+    int STRDT = 43;
+    int STRLANG = 44;
+    int BNODE = 45;
+    int COALESCE = 46;
+    int IF = 47;
+    int SYSTEM = 48;
+    int GROUPCONCAT = 49;
+    int SAMPLE = 50;
 
-	public static int QUERY 	= 302;
-	public static int EXTENSION 	= 303;
-	public static int EVEN          = 304;
-	public static int ODD           = 305;
-	public static int READ          = 306;
-        public static int PACKAGE       = 307;
-        
-        public static int IOTA          = 308;
-        public static int LIST          = 309;
-        public static int MAP           = 310;
-        public static int MAPLIST       = 311;
-        public static int APPLY         = 312;
-	public static int LET           = 313;
-	public static int LAMBDA        = 314;
-	public static int ERROR         = 315;
-	public static int MAPEVERY      = 316;
-	public static int MAPANY        = 317;
- 	public static int MAPFIND       = 318;
-	public static int MAPFINDLIST   = 319;
-	public static int MAPMERGE      = 320;
-	public static int MAPFUN        = 321;
-	public static int SET           = 322;
-	public static int SEQUENCE      = 323;
-	public static int RETURN        = 324;
-	public static int EVAL          = 325;
-	public static int FUNCALL       = 326;
-	public static int FOR           = 327;
-        
-	public static int XT_SORT       = 330;
-        
-        public static int XT_MAPPING     = 400;
-        public static int XT_ADD         = 401;
-        public static int XT_CONCAT      = 402;
-        public static int XT_COUNT       = 403;
-        public static int XT_CONS        = 404;
-        public static int XT_FIRST       = 405;
-        public static int XT_REST        = 406;
-        public static int XT_GET         = 407;        
-        public static int XT_SET         = 408;
-	public static int XT_REVERSE     = 409;       
-	public static int XT_APPEND      = 410;       
-        
-        public static int XT_SUBJECT     = 411;
-        public static int XT_OBJECT      = 412;
-        public static int XT_PROPERTY    = 413;
-        public static int XT_VALUE       = 414;
-        public static int XT_INDEX       = 415;
-        public static int XT_GRAPH       = 416;
-        public static int XT_REJECT      = 417;
-        public static int XT_VARIABLES   = 418;
-        public static int XT_VALUES      = 419;
-        public static int XT_EDGE        = 420;
-        public static int XT_TRIPLE      = 421;
-        public static int XT_GEN_GET     = 422;
-        public static int XT_DISPLAY     = 423;
-        public static int XT_TUNE        = 424;
-        
-        public static int XT_UNION       = 425;
-        public static int XT_MINUS       = 426;
-        public static int XT_OPTIONAL    = 427;
-        public static int XT_JOIN        = 428;
-        public static int XT_QUERY       = 429;
-        public static int XT_AST         = 430;
-        public static int XT_CONTEXT     = 431;
-        public static int XT_METADATA    = 432;
-        public static int XT_FROM        = 433;
-        public static int XT_NAMED       = 434;
-     
-        public static int SLICE       = 450;
-        public static int EDGE_LEVEL  = 451;
-        
+    int STRLEN = 51;
+    int SUBSTR = 52;
+    int UCASE = 53;
+    int LCASE = 54;
+    int ENDS = 55;
+    int STARTS = 56;
+    int CONTAINS = 57;
+    int ENCODE = 58;
+    int CONCAT = 59;
+
+    int YEAR = 60;
+    int MONTH = 61;
+    int DAY = 62;
+    int HOURS = 63;
+    int MINUTES = 64;
+    int SECONDS = 65;
+    int TIMEZONE = 66;
+    int NOW = 67;
+
+    int ABS = 68;
+    int FLOOR = 69;
+    int ROUND = 70;
+    int CEILING = 71;
+    int RANDOM = 72;
+
+    int HASH = 73;
+    int URI = 74;
+    int TZ = 75;
+    int STR = 76;
+
+    int STRBEFORE = 77;
+    int STRAFTER = 78;
+    int STRREPLACE = 79;
+    int FUUID = 80;
+    int STRUUID = 81;
+    int XSDSTRING = 82;
+    int APPROXIMATE = 83;
+    int APP_SIM = 84;
+
+
+    // term
+    int TEQ = 101;
+    int TNEQ = 102;
+    int TLE = 103;
+    int TGE = 104;
+    int TLT = 105;
+    int TGT = 106;
+
+    int EQNE = 109;
+
+    int EQ = 110;
+    int NE = 111;
+    int NEQ = 111;
+
+    int GL = 112;
+    int LE = 113;
+    int GE = 114;
+    int LT = 115;
+    int GT = 116;
+
+    int PLUS = 117;
+    int MINUS = 118;
+    int MULT = 119;
+
+    int DIV = 120;
+
+    int CONT = 121; // ~
+    int START = 122; // ^
+    int IN = 123;
+    int POWER = 124;
+
+
+    // extension
+
+    int DISPLAY = 200;
+    int NUMBER = 201;
+    int SIM = 202;
+    int EXTEQUAL = 203;
+    int EXTCONT = 204;
+    int PROCESS = 205;
+    int ENV = 206;
+    int DEPTH = 207;
+    int KG_GRAPH = 208;
+    int NODE = 209;
+    int GET_OBJECT = 210;
+    int SET_OBJECT = 211;
+    int LOAD = 212;
+    int PATHNODE = 213;
+    int GROUPBY = 214;
+    int PSIM = 215;
+    int GETP = 216;
+    int SETP = 217;
+    int PWEIGHT = 218;
+    int ANCESTOR = 219;
+    int PROVENANCE = 220;
+    int INDEX = 221;
+    int TIMESTAMP = 222;
+    int ID = 223;
+    int TEST = 224;
+    int DESCRIBE = 225;
+    int STORE = 226;
+
+
+    int TURTLE = 227;
+    int LEVEL = 228;
+    int INDENT = 229;
+    int PPURI = 230;
+    int URILITERAL = 231;
+    int VISITED = 232;
+    int AGGAND = 233;
+    int PROLOG = 234;
+    int WRITE = 235;
+    int FOCUS_NODE = 236;
+    int XSDLITERAL = 237;
+    int QNAME = 238;
+
+    int STL_DEFAULT = 239;
+    int STL_DEFINE = 240;
+    int STL_NL = 241;
+    int STL_PREFIX = 242;
+    int STL_AGGREGATE = 243;
+    int STL_CONCAT = 244;
+    int STL_GROUPCONCAT = 245;
+    int STL_AND = 246;
+    int STL_NUMBER = 247;
+    int STL_LOAD = 248;
+    int STL_IMPORT = 249;
+    int STL_PROCESS = 250;
+
+
+    int APPLY_TEMPLATES = 251;
+    int APPLY_TEMPLATES_WITH = 252;
+    int APPLY_TEMPLATES_ALL = 253;
+    int APPLY_TEMPLATES_WITH_ALL = 254;
+    int APPLY_TEMPLATES_GRAPH = 255;
+    int APPLY_TEMPLATES_WITH_GRAPH = 256;
+    int APPLY_TEMPLATES_NOGRAPH = 257;
+    int APPLY_TEMPLATES_WITH_NOGRAPH = 258;
+    int CALL_TEMPLATE = 259;
+    int CALL_TEMPLATE_WITH = 260;
+    int STL_TEMPLATE = 261;
+
+    int STL_SET = 262;
+    int STL_GET = 263;
+    int STL_BOOLEAN = 264;
+    int STL_VISIT = 265;
+    int STL_VISITED = 266;
+    int STL_FUTURE = 267;
+    int STL_INDEX = 268;
+    int STL_VSET = 269;
+    int STL_VGET = 270;
+    int STL_PROCESS_URI = 271;
+    int STL_EXPORT = 272;
+    int STL_ERRORS = 273;
+    int STL_ISSTART = 274;
+    int AGGLIST = 275;
+    int AGGREGATE = 276;
+    int STL_FORMAT = 277;
+    int STL_VISITED_GRAPH = 278;
+
+
+    int ISSKOLEM = 300;
+    int SKOLEM = 301;
+
+    int QUERY = 302;
+    int EXTENSION = 303;
+    int EVEN = 304;
+    int ODD = 305;
+    int READ = 306;
+    int PACKAGE = 307;
+
+    int IOTA = 308;
+    int LIST = 309;
+    int MAP = 310;
+    int MAPLIST = 311;
+    int APPLY = 312;
+    int LET = 313;
+    int LAMBDA = 314;
+    int ERROR = 315;
+    int MAPEVERY = 316;
+    int MAPANY = 317;
+    int MAPFIND = 318;
+    int MAPFINDLIST = 319;
+    int MAPMERGE = 320;
+    int MAPFUN = 321;
+    int SET = 322;
+    int SEQUENCE = 323;
+    int RETURN = 324;
+    int EVAL = 325;
+    int FUNCALL = 326;
+    int FOR = 327;
+
+    int XT_SORT = 330;
+
+    int XT_MAPPING = 400;
+    int XT_ADD = 401;
+    int XT_CONCAT = 402;
+    int XT_COUNT = 403;
+    int XT_CONS = 404;
+    int XT_FIRST = 405;
+    int XT_REST = 406;
+    int XT_GET = 407;
+    int XT_SET = 408;
+    int XT_REVERSE = 409;
+    int XT_APPEND = 410;
+
+    int XT_SUBJECT = 411;
+    int XT_OBJECT = 412;
+    int XT_PROPERTY = 413;
+    int XT_VALUE = 414;
+    int XT_INDEX = 415;
+    int XT_GRAPH = 416;
+    int XT_REJECT = 417;
+    int XT_VARIABLES = 418;
+    int XT_VALUES = 419;
+    int XT_EDGE = 420;
+    int XT_TRIPLE = 421;
+    int XT_GEN_GET = 422;
+    int XT_DISPLAY = 423;
+    int XT_TUNE = 424;
+
+    int XT_UNION = 425;
+    int XT_MINUS = 426;
+    int XT_OPTIONAL = 427;
+    int XT_JOIN = 428;
+    int XT_QUERY = 429;
+    int XT_AST = 430;
+    int XT_CONTEXT = 431;
+    int XT_METADATA = 432;
+    int XT_FROM = 433;
+    int XT_NAMED = 434;
+
+    int SLICE = 450;
+    int EDGE_LEVEL = 451;
+
 
 }

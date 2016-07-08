@@ -3,12 +3,11 @@ package fr.inria.edelweiss.kgram.core;
 import fr.inria.edelweiss.kgram.api.core.Entity;
 import fr.inria.edelweiss.kgram.api.core.Pointerable;
 import fr.inria.edelweiss.kgram.api.core.TripleStore;
+
 import java.util.ArrayList;
 
 /**
- *
  * @author Olivier Corby, Wimmics INRIA I3S, 2015
- *
  */
 public abstract class PointerObject implements Pointerable {
     static final ArrayList empty = new ArrayList(0);
@@ -20,7 +19,7 @@ public abstract class PointerObject implements Pointerable {
 
     @Override
     public Mappings getMappings() {
-        return null;    
+        return null;
     }
 
     @Override
@@ -32,28 +31,28 @@ public abstract class PointerObject implements Pointerable {
     public Entity getEntity() {
         return null;
     }
-    
-     @Override
+
+    @Override
     public Query getQuery() {
         return null;
     }
-    
+
     @Override
-    public TripleStore getTripleStore(){
+    public TripleStore getTripleStore() {
         return null;
     }
-    
+
     @Override
-    public int size(){
+    public int size() {
         return 0;
     }
-    
+
     @Override
-    public Object getValue(String var, int n){
+    public Object getValue(String var, int n) {
         return null;
     }
-    
-    public Iterable getLoop(){
+
+    public Iterable getLoop() {
         return empty;
     }
 

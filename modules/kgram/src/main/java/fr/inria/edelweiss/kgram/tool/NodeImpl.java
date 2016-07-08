@@ -1,28 +1,31 @@
-//package fr.inria.edelweiss.kgram.tool;
-//
-//
-//import fr.inria.edelweiss.kgram.api.core.Node;
-//
-///**
-// * To implement from/named URI as Node
-// * To be uniform (kgram manages only nodes)
-// * @author corby
-// *
-// */
+package fr.inria.edelweiss.kgram.tool;
+
+
+import fr.inria.edelweiss.kgram.api.core.Node;
+
+/**
+ * To implement from/named URI as Node
+ * To be uniform (kgram manages only nodes)
+ * @author corby
+ *
+ */
+
+// TODO : Supprimer cette classe si inutilisée
+public class NodeImpl {
 //public class NodeImpl implements Node {
-//	
+//
 //	String label;
 //	int index;
 //	Object object;
-//	
+//
 //	public NodeImpl(String l){
 //		label = l;
 //	}
-//	
+//
 //	public static NodeImpl create(String label){
 //		return new NodeImpl(label);
 //	}
-//	
+//
 //	public String toString(){
 //		return label;
 //	}
@@ -38,7 +41,7 @@
 //		// TODO Auto-generated method stub
 //		return label;
 //	}
-//	
+//
 //	public Object getValue(){
 //		return null;
 //	}
@@ -66,7 +69,7 @@
 //		// TODO Auto-generated method stub
 //		return false;
 //	}
-//	
+//
 //	public boolean isConstant() {
 //		// TODO Auto-generated method stub
 //		return true;
@@ -95,7 +98,7 @@
 //	@Override
 //	public void setProperty(int p, Object o) {
 //		// TODO Auto-generated method stub
-//		
-//	}
 //
-//}
+//	}
+
+}

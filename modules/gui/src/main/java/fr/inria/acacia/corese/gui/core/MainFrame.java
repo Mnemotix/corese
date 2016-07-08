@@ -75,14 +75,14 @@ public class MainFrame extends JFrame implements ActionListener {
 	private static final String TITLE = "Corese 3.2 - Wimmics INRIA I3S - 2016-06-21";
 	// On déclare notre conteneur d'onglets
 	protected static JTabbedPane conteneurOnglets;
-	// Compteur pour le nombre d'onglets query créés 
+	// Compteur pour le nombre d'onglets query créés
 	private ArrayList<Integer> nbreTab = new ArrayList<Integer>();
 	private String lCurrentPath = "user/home";
 	private String lPath;
-	//Variable true ou false pour déterminer le mode Kgram ou Corese	
+	//Variable true ou false pour déterminer le mode Kgram ou Corese
 	private boolean isKgram = true;
 	boolean trace = false;
-	// Pour le menu 
+	// Pour le menu
 	private JMenuItem loadRDF;
 	private JMenuItem loadRDFs;
 	private JMenuItem loadQuery;
@@ -137,17 +137,17 @@ public class MainFrame extends JFrame implements ActionListener {
 	private String defaultStylesheet, saveStylesheet;
 	private ArrayList<JCheckBox> listCheckbox;	//list qui stocke les JCheckBoxs présentes sur le JPanelListener
 	private ArrayList<JMenuItem> listJMenuItems;	//list qui stocke les Boutons présents sur le JPanelListener
-	// Les 3 types d'onglets 
+	// Les 3 types d'onglets
 	private ArrayList<MyJPanelQuery> monTabOnglet;
 	private JPanel plus;
 	private MyJPanelQuery current;
 	private MyJPanelListener ongletListener;
-	// Pour connaître l'onglet selectionné 
+	// Pour connaître l'onglet selectionné
 	protected int selected;
-	// Texte dans l'onglet requête 
+	// Texte dans l'onglet requête
 	private String textQuery;
 
-	// Texte par défaut dans l'onglet requête 
+	// Texte par défaut dans l'onglet requête
 	private static final String DEFAULT_SELECT_QUERY = "select.rq";
 	private static final String DEFAULT_GRAPH_QUERY = "graph.rq";
 	private static final String DEFAULT_CONSTRUCT_QUERY = "construct.rq";
@@ -188,7 +188,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private static final String URI_GRAPHSTREAM = "http://graphstream-project.org/";
 
 	int nbTabs = 0;
-        
+
         static {
             // false: load files into named graphs
             // true:  load files into kg:default graph
@@ -240,7 +240,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		conteneurOnglets.addTab("System", ongletListener);
 		conteneurOnglets.addTab("+", plus);
 
-		//Par défaut, l'onglet sélectionné est "listener" 
+		//Par défaut, l'onglet sélectionné est "listener"
 		conteneurOnglets.setSelectedIndex(0);
 
 		//S'applique lors d'un changement de selection d'onglet
@@ -373,7 +373,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	 */
 	public void newQuery() {
 		nbTabs++;
-		//supprime l'onglet "+", ajoute un onglet Query, puis recrée l'onglet "+" à la suite	
+		//supprime l'onglet "+", ajoute un onglet Query, puis recrée l'onglet "+" à la suite
 		conteneurOnglets.remove(plus);
 		MyJPanelQuery temp = new MyJPanelQuery(this);
 
@@ -404,12 +404,12 @@ public class MainFrame extends JFrame implements ActionListener {
 		if (conteneurOnglets.getComponentCount() == 3) {
 			//On applique la croix fermante sur le 2eme composant (l'onglet tout juste créé)
 			initTabComponent(1);
-		} //S'il y en avait déjà 
+		} //S'il y en avait déjà
 		else {
 			initTabComponent(conteneurOnglets.getComponentCount() - 3);
 		}
 
-		//sélectionne l'onglet fraichement créé 
+		//sélectionne l'onglet fraichement créé
 		conteneurOnglets.setSelectedIndex(conteneurOnglets.getComponentCount() - 3);
 	}
 
@@ -711,7 +711,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			}
 		});
 		cbrdfs.setSelected(true);
-                
+
                 cbnamed.setSelected(true);
                 cbnamed.setEnabled(true);
                 cbnamed.addItemListener(
@@ -895,7 +895,7 @@ public class MainFrame extends JFrame implements ActionListener {
 					BufferedWriter out = new BufferedWriter(lu);
 					// Mettre dans le flux le contenu de la zone de texte
 					out.write(current.getTextPaneQuery().getText());
-					// Fermer le flux 
+					// Fermer le flux
 					out.close();
 
 				} catch (IOException er) {
@@ -1034,7 +1034,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			execPlus(query);
 		}
 	}
-        
+
        void reset() {
             ongletListener.getTextPaneLogs().setText("");
             ongletListener.getListLoadedFiles().removeAll();
@@ -1059,7 +1059,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				BufferedWriter out = new BufferedWriter(lu);
 				// Mettre dans le flux le contenu de la zone de texte
 				out.write(str);
-				// Fermer le flux 
+				// Fermer le flux
 				out.close();
 
 			} catch (IOException er) {

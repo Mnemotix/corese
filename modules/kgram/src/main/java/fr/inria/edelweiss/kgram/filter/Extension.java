@@ -1,15 +1,15 @@
 package fr.inria.edelweiss.kgram.filter;
 
 import fr.inria.edelweiss.kgram.api.core.Expr;
+
 import java.util.HashMap;
 
 /**
- * Manage extension functions 
+ * Manage extension functions
  * Expr exp must have executed exp.local() to tag
  * local variables
  *
  * @author Olivier Corby, Wimmics INRIA I3S, 2015
- *
  */
 public class Extension {
 
@@ -18,64 +18,64 @@ public class Extension {
     FunMap[] maps;
     private String name;
     private Object pack;
-    
-    public class FunMap extends HashMap<String, Expr> {}
+
+    public class FunMap extends HashMap<String, Expr> {
+    }
 
     public Extension() {
         //map = new FunMap();
         maps = new FunMap[11];
-        for (int i=0; i<maps.length; i++){
+        for (int i = 0; i < maps.length; i++) {
             maps[i] = new FunMap();
         }
     }
-    
-    public Extension(String n){
+
+    public Extension(String n) {
         this();
         name = n;
     }
-    
-    FunMap getMap(Expr exp){
+
+    FunMap getMap(Expr exp) {
         return getMap(exp.arity());
     }
-    
-    FunMap getMap(int n){
-         if (n >= maps.length){
+
+    FunMap getMap(int n) {
+        if (n >= maps.length) {
             return null;
         }
         return maps[n];
     }
-    
-    public FunMap[] getMaps(){
+
+    public FunMap[] getMaps() {
         return maps;
     }
 
     /**
-     *
      * exp: st:fac(?x) = if (?x = 1, 1, ?x * st:fac(?x - 1))
      */
     public void define(Expr exp) {
         Expr fun = exp.getFunction(); //exp.getExp(0);
         getMap(fun).put(fun.getLabel(), exp);
     }
-    
-    public void add(Extension ext){
-        for (FunMap m : ext.getMaps()){
-            for (Expr e : m.values()){
-                if (! isDefined(e.getFunction())){ //getExp(0))){
+
+    public void add(Extension ext) {
+        for (FunMap m : ext.getMaps()) {
+            for (Expr e : m.values()) {
+                if (!isDefined(e.getFunction())) { //getExp(0))){
                     define(e);
                 }
             }
         }
     }
-    
+
     /**
      * Use case: Transformation st:profile exports its functions to transformation
      * They are declared as public
      * Hence Interpreter isPublic() is OK.
      */
-     public void setPublic(boolean b){
-        for (FunMap m : getMaps()){
-            for (Expr e : m.values()){
+    public void setPublic(boolean b) {
+        for (FunMap m : getMaps()) {
+            for (Expr e : m.values()) {
                 e.setPublic(b);
             }
         }
@@ -97,35 +97,35 @@ public class Extension {
         Expr def = getMap(exp).get(exp.getLabel());
         return def;
     }
-    
+
     public Expr get(Expr exp, String name) {
         Expr def = getMap(exp).get(name);
         return def;
     }
-    
+
     public Expr get(String label) {
-        for (int i = 0; i<maps.length; i++){
+        for (int i = 0; i < maps.length; i++) {
             Expr exp = get(label, i);
-            if (exp != null){
+            if (exp != null) {
                 return exp;
             }
         }
         return null;
     }
-    
+
     public Expr get(String label, int n) {
         FunMap m = getMap(n);
-        if (m == null){
+        if (m == null) {
             return null;
         }
         return m.get(label);
     }
-    
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("extension: ");
         sb.append(NL);
-        for (FunMap m : getMaps()){
+        for (FunMap m : getMaps()) {
             for (Expr exp : m.values()) {
                 sb.append(exp);
                 sb.append(NL);

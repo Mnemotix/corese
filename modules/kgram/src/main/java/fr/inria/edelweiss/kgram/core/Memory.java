@@ -25,7 +25,6 @@ import fr.inria.edelweiss.kgram.tool.ApproximateSearchEnv;
  * Node and Edge binding stacks for KGRAM evaluator
  *
  * @author Olivier Corby, Edelweiss, INRIA 2009
- *
  */
 public class Memory implements Environment {
     public static boolean IS_EDGE = !true;
@@ -34,9 +33,9 @@ public class Memory implements Environment {
     // number of times nodes are bound by Stack
     // decrease with backtrack
     int[] nbNodes, nbEdges,
-            // stackIndex[n] = index in Eval Exp stack where nth node is bound first
-            // enable to compute where to backjump
-            stackIndex;
+    // stackIndex[n] = index in Eval Exp stack where nth node is bound first
+    // enable to compute where to backjump
+    stackIndex;
     Edge[] qEdges;
     Entity[] result;
     Node[] qNodes, nodes;
@@ -171,20 +170,20 @@ public class Memory implements Environment {
             // because index may vary from 0 to max in any sub query
             q = q.getGlobalQuery();
         }
-        if (q.isRecordEdge()){
+        if (q.isRecordEdge()) {
             isEdge = true;
         }
         int nmax = q.nbNodes();
         int emax = q.nbEdges();
         nbNodes = new int[nmax];
         stackIndex = new int[nmax];
-        if (! isEdge) {
+        if (!isEdge) {
             emax = 0;
         }
         nbEdges = new int[emax];
         result = new Entity[emax];
         qEdges = new Edge[emax];
-        
+
         nodes = new Node[nmax];
         qNodes = new Node[nmax];
         lPath = new Path[nmax];
@@ -253,7 +252,6 @@ public class Memory implements Environment {
      * Use case: exists {} , sub query Can bind all Memory nodes or bind only
      * subquery select nodes (2 different semantics) TODO: let ( .., exists {}),
      * MUST push BGP solution and then push Bind
-     *
      */
     Memory copyInto(Query sub, Memory mem) {
         int n = 0;
@@ -374,7 +372,7 @@ public class Memory implements Environment {
                 if (edge != null) {
                     qedge[n] = edge;
                     //tedge[n] = result[i];
-                    tedge[n] = p.copy(result[i]);                    
+                    tedge[n] = p.copy(result[i]);
                     n++;
                 }
                 i++;
@@ -473,7 +471,7 @@ public class Memory implements Environment {
         clear();
         return map;
     }
-    
+
     /**
      * BNode table cleared for new solution
      */
@@ -732,7 +730,6 @@ public class Memory implements Environment {
      * Bind Mapping in order to compute aggregate on one group Create a fresh
      * new bnode table for the solution of this group use case: select
      * (count(?x) as ?c) (bnode(?c) as ?bn)
-     *
      */
     void aggregate(Mapping map) {
         push(map, -1);
@@ -807,7 +804,7 @@ public class Memory implements Environment {
                         // pop
                         for (int i = 0; i < k; i++) {
                             Node qq = map.getQueryNode(i);
-                            if (qq != null){
+                            if (qq != null) {
                                 Node tt = list.get(qq.getLabel());
                                 if (tt != null) {
                                     pop(tt);
@@ -825,8 +822,8 @@ public class Memory implements Environment {
         }
         return true;
     }
-    
-     void pop(HashMap<String, Node> list, Mapping map) {
+
+    void pop(HashMap<String, Node> list, Mapping map) {
         int n = 0;
         for (Node qNode : map.getQueryNodes()) {
             if (qNode != null) {
@@ -840,8 +837,8 @@ public class Memory implements Environment {
             }
             n++;
         }
-     }
-  
+    }
+
 
     /**
      * Pop elementary result
@@ -1009,7 +1006,7 @@ public class Memory implements Environment {
 
     /**
      * *************************************
-     *
+     * <p>
      * Aggregates and system functions
      */
     public int count() {
