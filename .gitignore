@@ -8,3 +8,6 @@ target/
 *.iml
 nbactions.xml
 nb-configurations.xml
+.DS_Store
+*~
+*.swp
