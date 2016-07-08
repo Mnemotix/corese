@@ -1,7 +1,0 @@
-template {
-    "InverseObjectProperties("  ?in " " ?y ")"  
-}
-where {
-  ?in owl:inverseOf ?y
-  filter(isURI(?in))
-}

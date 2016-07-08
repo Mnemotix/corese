@@ -1,4 +1,0 @@
-template st:sstyle {
-  "class='form-control select'"
-}
-where {}

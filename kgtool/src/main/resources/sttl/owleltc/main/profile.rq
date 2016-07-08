@@ -1,8 +1,0 @@
-template st:profile(?x) {
- 
-
-}
-where {}
-
-function st:aggregate(?x) { st:agg_and(?x) }
-

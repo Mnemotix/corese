@@ -1,9 +1,0 @@
-template st:head {
-
-  if (st:get(st:protocol, st:ajax), "",
-    st:call-template(st:dohead))
-    
-}
-where {
-
-}

@@ -1,8 +1,0 @@
-template {
-  "{\"@id\": \""  str(?in)  "\"}"
-}
-where {
-  ?x ?p ?in
-  filter isURI(?in)
-}
-limit 1

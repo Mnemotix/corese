@@ -1,8 +1,0 @@
-template st:bstyle { 
-    
-      "class='btn btn-warning'" 
-        
-}
-where {
-  filter (st:get(st:protocol, st:ajax))
-}

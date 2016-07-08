@@ -1,8 +1,0 @@
-template st:link(?date) {
-
-  "<a href='#" str(?date) "'>"  day(?date)  "</a>"
-  
-}
-where {
-   
-}

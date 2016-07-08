@@ -1,9 +1,0 @@
-@prefix sql: <http://ns.inria.fr/ast/sql#> 
-
-template sql:comma {
-  ?e
-  ; separator = ", "
-}
-where {
-  ?in rdf:rest*/rdf:first ?e
-}

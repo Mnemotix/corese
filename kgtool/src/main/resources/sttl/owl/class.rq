@@ -1,9 +1,0 @@
-template {
-    "Declaration(Class(" ?in  "))"  "\n"
-}
-where {
-  ?in a owl:Class 
-  filter(isURI(?in))
-}
-pragma { st:template st:priority 2 }
-

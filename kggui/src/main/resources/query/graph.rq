@@ -1,5 +1,0 @@
-select * where {
-  graph ?g {
-    ?x ?p ?y
-  }
-}

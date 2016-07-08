@@ -1,5 +1,0 @@
-select (count(*) as ?c) 
-from kg:entailment
-where {
-   ?x ?p ?y
-}

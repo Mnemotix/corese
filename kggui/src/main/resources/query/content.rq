@@ -1,8 +1,0 @@
-template {
-  ?p ' : ' count(*)
-}
-where {
-  ?x ?p ?y
-}
-group by ?p
-order by desc(count(*))

@@ -1,9 +1,0 @@
-template {
-   "DifferentIndividuals("  
-      ?in " " ?l 
-   ")"   
-}
-where {
-  ?in a owl:allDifferent   
-  ?in owl:members | owl:distinctMembers ?l 
-}

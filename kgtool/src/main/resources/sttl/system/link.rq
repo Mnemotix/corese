@@ -1,5 +1,0 @@
-template st:link(?uri, ?title) {
-   "<a href='"  str(?uri) "'>" str(?title) "</a>"
-}
-where {
-}

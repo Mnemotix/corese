@@ -1,9 +1,0 @@
-template st:provenance(?pr) {
-
-  "<img src='/img/smarker.png' onclick='alert(\"" str(?b) "\")'  />"
-   
-}
-where {
-  
-  bind ( replace(str(?pr), "\n", "\\\\n") as ?b ) 
-}

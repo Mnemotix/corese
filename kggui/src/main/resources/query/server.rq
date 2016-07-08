@@ -1,5 +1,0 @@
-@service <http://fr.dbpedia.org/sparql>
-select * where {
-  ?x rdfs:label ?y
-}
-limit 10
