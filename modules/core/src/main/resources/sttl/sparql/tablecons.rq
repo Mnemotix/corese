@@ -1,0 +1,25 @@
+template st:tablecons {
+format {
+  """
+  <tr>
+  <th>%s</th>
+  <td>%s</td><td>%s</td><td>%s</td><td>%s</th><td>%s</td>
+  </tr>
+  """
+  
+  st:number()
+  st:call-template(st:show,    ?x)
+  st:display(?x) 
+  st:display(?p) 
+  st:display(?y) 
+  st:call-template(st:show,    ?y)
+}
+}
+where {
+  ?x ?p ?y
+  bind (st:get(st:uri) as ?uri)
+  filter (if (bound(?uri), ?uri in (?x, ?p, ?y), true))
+}
+order by ?x ?p ?y
+
+

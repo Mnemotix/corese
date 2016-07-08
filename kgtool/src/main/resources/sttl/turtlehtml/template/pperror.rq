@@ -1,8 +1,0 @@
-template st:pperror(?in) {
-	"""<span class='fail'>"""
-		st:call-template(st:ibox, ?in)
-	"</span>"
-}
-where {
-
-}

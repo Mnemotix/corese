@@ -1,0 +1,19 @@
+prefix p:    <http://fr.dbpedia.org/property/>
+prefix o:    <http://dbpedia.org/ontology/>
+
+template st:descresource(?r) {
+format {
+  """
+  <tr>
+  <th class='left'>%s</th>
+  <td>%s</td>
+  </tr>
+  """ 
+  
+  str(?p)
+  st:call-template(st:triple, ?r, ?p, ?v)
+  }
+}
+where { 
+    ?r ?p ?v
+}

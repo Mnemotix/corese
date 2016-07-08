@@ -1,0 +1,49 @@
+#
+# Method m:surface defined on us:Figure classes
+# Olivier Corby - Wimmics Inria I3S - 2015
+#
+prefix m: <http://ns.inria.fr/sparql-extension/method#>
+select * (m:method(us:surface, ?x) as ?m) (m:surface(?x) as ?s)
+where {
+  ?x a us:Figure
+}
+
+function m:surface(?x){
+  m:funcall(us:surface, ?x)
+}
+
+function m:funcall(?m, ?x){
+  funcall (m:method(?m, ?x), ?x)
+}
+
+function m:method(?m, ?x){
+  let ((?fun) = 
+    select * where { 
+    ?x rdf:type/rdfs:subClassOf* ?t . 
+    ?fun a xt:Method ; xt:name ?m ; xt:input(?t)})
+  { ?fun }
+}
+
+function m:surfaceRectangle(?x){
+  let ((?w, ?l) = select * where { ?x us:width ?w ; us:length ?l }){
+    ?w * ?l
+  }
+}
+
+function m:surfaceSquare(?x){
+  let ((?l) = select * where { ?x  us:side ?l }){
+    ?l * ?l
+  }
+}
+
+function m:surfaceTriangle(?x){
+  let ((?h, ?b) = select * where { ?x us:height ?h ; us:base ?b }){
+    (?h * ?b) / 2
+  }
+}
+
+function m:surfaceCircle(?x){
+  let ((?r) = select * where { ?x us:radius ?r }){
+     3.14159 * power(?r, 2) 
+  }
+}

@@ -1,7 +1,0 @@
-template st:mainEL(?tag) {
-	st:call-template(st:allEL, ?tag)
-	st:call-template(st:oneEL, ?tag)
-}
-where {
-	
-}

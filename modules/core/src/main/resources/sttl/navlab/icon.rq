@@ -1,0 +1,7 @@
+template st:icon(?label, ?ic) {
+  format {
+    "<img width='250' alt=\"%s\" src=\"%s\" />"
+    str(?label) str(?ic)
+  }
+}
+where {}

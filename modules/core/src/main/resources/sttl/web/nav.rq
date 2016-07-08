@@ -1,0 +1,15 @@
+template st:nav {
+ 
+ format {
+ 
+ """
+ <input type='button' %s onclick="show('sol')" value='Solution' />      
+ <input type='button' %s onclick="show('tmp')" value='Template' /> 
+ """
+      
+  st:bstyle()
+  st:bstyle()   
+  }
+   
+ }
+where {}

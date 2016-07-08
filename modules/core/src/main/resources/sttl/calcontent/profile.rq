@@ -1,0 +1,10 @@
+prefix cal: <http://ns.inria.fr/sparql-extension/calendar/>
+template st:profile {
+           
+}
+where {}
+
+
+
+
+    

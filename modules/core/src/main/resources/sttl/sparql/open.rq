@@ -1,0 +1,16 @@
+prefix rs: <http://www.w3.org/2001/sw/DataAccess/tests/result-set#>
+template st:open {
+
+format {
+
+  """
+  <h3>Result</h3>
+  <table class='table'>    
+  <tr><td/>%s</tr>\n
+  """
+ 
+ st:call-template(st:th)
+ }
+}
+where {
+}

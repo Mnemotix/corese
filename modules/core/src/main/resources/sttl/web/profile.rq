@@ -1,0 +1,9 @@
+template st:profile {
+   
+}
+where {}
+ 
+  function st:proto() {
+    coalesce(st:get(st:protocol), st:std)
+  }
+
